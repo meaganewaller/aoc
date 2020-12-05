@@ -9,6 +9,6 @@ describe Puzzle do
 
   xit "returns count of valid passports" do
     passports = Puzzle.passportify_input("./day-04/input.txt")
-    expect(Puzzle.count_valid_passports(passports)).to eql ___
+    expect(Puzzle.count_valid_passports(passports)).to eql ____
   end
 end
