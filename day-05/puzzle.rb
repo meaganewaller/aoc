@@ -30,7 +30,7 @@ class Puzzle
     binding.pry
 
     # From the grouped, select the objects where there are fewer
-    # than 7 values, this means there are open seats in that row (the key is the row)
+    # than 8 values, this means there are open seats in that row (the key is the row)
     narrowed_group = grouped_seats.select {|k, v| v.count < 8 }
     rows_with_empty_seats = narrowed_group.keys
 
