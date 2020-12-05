@@ -27,7 +27,6 @@ class Puzzle
     # Turns into:
     # {2 => [2,6], [2,7], [2,4]], 4 => [[4, 5]]}
     grouped_seats = seats.group_by { |s| s[0] }
-    binding.pry
 
     # From the grouped, select the objects where there are fewer
     # than 8 values, this means there are open seats in that row (the key is the row)
