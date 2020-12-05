@@ -14,4 +14,9 @@ describe Puzzle do
     boarding_passes = File.readlines('./day-05/input.txt').map(&:strip)
     expect(Puzzle.solve_part_one(boarding_passes)).to eql ""
   end
+
+  xit "solves part two" do
+    boarding_passes = File.readlines('./day-05/input.txt').map(&:strip)
+    expect(Puzzle.solve_part_two(boarding_passes)).to eql ""
+  end
 end

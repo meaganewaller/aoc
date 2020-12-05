@@ -4,10 +4,52 @@ require 'pry-nav'
 
 class Puzzle
   def self.solve_part_one(passes)
+    get_all_seat_ids(passes).last
+  end
+
+  def self.get_all_seat_ids(passes)
     seat_ids = passes.map do |pass|
       seat = Puzzle.find_seat(pass)
       Puzzle.find_seat_id(seat)
-    end.sort.last
+    end.sort
+  end
+
+  def self.solve_part_two(passes)
+    seats = passes.map do |pass|
+      find_seat(pass)
+    end.sort
+
+
+    all_seat_ids = get_all_seat_ids(passes)
+    the_seat = nil
+    # Group the array such that an array that looks like:
+    # [[2, 6], [2, 7], [2, 4], [4, 5]]
+    # Turns into:
+    # {2 => [2,6], [2,7], [2,4]], 4 => [[4, 5]]}
+    grouped_seats = seats.group_by { |s| s[0] }
+    binding.pry
+
+    # From the grouped, select the objects where there are fewer
+    # than 7 values, this means there are open seats in that row (the key is the row)
+    narrowed_group = grouped_seats.select {|k, v| v.count < 8 }
+    rows_with_empty_seats = narrowed_group.keys
+
+    rows_with_empty_seats.each do |row|
+      taken_seats = narrowed_group[row].map do |seat|
+        seat[1]
+      end
+
+      open_seats = (1..7).to_a - taken_seats
+
+      open_seats.each do |s|
+        seat_id = find_seat_id([row, s])
+        if all_seat_ids.include?(seat_id + 1) && all_seat_ids.include?(seat_id - 1)
+          the_seat = [row, s]
+        end
+      end
+    end
+
+    return find_seat_id(the_seat)
   end
 
   def self.find_seat(coded)
