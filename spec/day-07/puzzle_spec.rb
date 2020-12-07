@@ -8,7 +8,7 @@ describe Puzzle do
     file = File.open('./spec/day-07/test_input.txt')
     rules = file.read.split("\n")
     hashed_rules = Puzzle.clean_rules(rules)
-    puzzled = Puzzle.get_bag_count(hashed_rules, "shiny gold")
+    puzzled = Puzzle.get_bag_containers_count(hashed_rules, "shiny gold")
     expect(puzzled).to eql 4
   end
 
@@ -17,7 +17,7 @@ describe Puzzle do
     rules = file.read.split("\n")
     hashed_rules = Puzzle.clean_rules(rules)
 
-    puzzled = Puzzle.get_bag_count(hashed_rules, "shiny gold")
+    puzzled = Puzzle.get_bag_containers_count(hashed_rules, "shiny gold")
     expect(puzzled).to eql 144
   end
 
