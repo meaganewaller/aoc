@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-nav'
 class Puzzle
 
   def self.find_doubles(input,sum)

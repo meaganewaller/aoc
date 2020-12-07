@@ -1,7 +1,3 @@
-require 'pry'
-require 'pry-nav'
-
-
 class Puzzle
   def self.solve_part_one(passes)
     get_all_seat_ids(passes).last
@@ -18,7 +14,6 @@ class Puzzle
     seats = passes.map do |pass|
       find_seat(pass)
     end.sort
-
 
     all_seat_ids = get_all_seat_ids(passes)
     the_seat = nil

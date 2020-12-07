@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-nav'
 class Puzzle
   def self.passportify_input(path)
     file = File.open(path)

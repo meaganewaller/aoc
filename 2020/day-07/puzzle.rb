@@ -1,6 +1,3 @@
-require 'pry'
-require 'pry-nav'
-
 class Puzzle
   def self.clean_rules(rules)
     rules.map do |rule|
@@ -40,7 +37,7 @@ class Puzzle
 
     all_containers << selected
     selected.map do |bag_color|
-      Puzzle.find_bag_containers(rules, bag_color, all_containers)
+      find_bag_containers(rules, bag_color, all_containers)
     end
   end
 end
