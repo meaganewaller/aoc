@@ -11,11 +11,10 @@ class Puzzle
     op, arg = instructions[visiting].split
     direction, number = [arg.chars.first, arg.chars[1..-1].join.to_i]
 
-    visiting += 1 if op == "nop"
+    visiting += 1 if op == "nop" || op == "acc"
 
     if op == "acc"
       acc = acc.send("#{direction}", number)
-      visiting += 1
     elsif op == "jmp"
       visiting = visiting.send("#{direction}", number)
     end
