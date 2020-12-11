@@ -7,11 +7,8 @@ class Puzzle
       end
     end.flatten
 
-    if !all_sums.include?(list[preamble_size])
-      return list[preamble_size]
-    else
-      part_one(preamble_size: preamble_size, list: list.drop(1))
-    end
+    return list[preamble_size] if !all_sums.include?(list[preamble_size])
+    part_one(preamble_size: preamble_size, list: list.drop(1))
   end
 
   def self.part_two(list:, invalid_number:)
