@@ -1,21 +1,29 @@
 class Puzzle
-  def self.part_one(list)
-    list = list.sort.insert(0, 0)
-    final_jolt = list[-1] + 3
-    diffs = [*list, final_jolt].each_cons(2).map { |a, b| b - a }
-    diffs.count(1) * diffs.count(3)
+  def self.part_one(list, current_jolt = 0, diffs=[3])
+    sorted = list.sort
+    jolt_diff = sorted[0] - current_jolt
+
+    diffs << jolt_diff
+
+    if sorted.size == 1
+      return diffs.count(1) * diffs.count(3)
+    else
+      current_jolt = sorted[0]
+      part_one(sorted.drop(1), current_jolt, diffs)
+    end
   end
 
   def self.part_two(list)
+    # Put a zero at the front of the first
     list = list.sort.insert(0, 0)
     paths = Hash.new(0)
     paths[0] = 1
     final_jolt = list[-1] + 3
 
     list.each do |l|
-      [1, 2, 3].each do |j|
-        if ([*list,final_jolt].include?(l+j))
-          paths[l+j] += paths[l]
+      [1, 2, 3].each do |m|
+        if ([*list,final_jolt].include?(l+m))
+          paths[l+m] += paths[l]
         end
       end
     end
