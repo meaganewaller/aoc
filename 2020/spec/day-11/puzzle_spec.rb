@@ -16,4 +16,9 @@ describe Puzzle do
     chart = File.readlines('./spec/day-11/input.txt').map(&:strip).map { |r| r.split("") }
     expect(Puzzle.part_two(chart)).to eql 26
   end
+
+  it "solves for part two for input" do
+    chart = File.readlines('./day-11/input.txt').map(&:strip).map { |r| r.split("") }
+    expect(Puzzle.part_two(chart)).to eql 26
+  end
 end

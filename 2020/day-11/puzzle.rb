@@ -41,37 +41,11 @@ class Puzzle
 
     new_chart = chart_dupe.map.with_index do |seats, row|
       seats.map.with_index do |seat, col|
-        # Seat occupied in same row in a higher column?
-        adjacent_greater_row = false
-        (col + 1...seats.size).each do |c|
-          if chart_dupe[row][c] == "#"
-            adjacent_greater_row = true
-          end
-        end
-
-        # Seat occupied in same row in a lower column?
-        adjacent_less_row = false
-        (0...col).each do |c|
-          if chart_dupe[row][c] == "#"
-            adjacent_less_row = true
-          end
-        end
-
-        # Seat occupied in same column in higher row?
-        adjacent_greater_col = false
-        (row + 1...chart_dupe.size).each do |r|
-          if chart_dupe[r][col] == "#"
-            adjacent_greater_col = true
-          end
-        end
-
-        # Seat occupied in same column in lower row?
-        adjacent_less_col = false
-        (0...row).each do |r|
-          if chart_dupe[r][col] == "#"
-            adjacent_less_col = true
-          end
-        end
+        adjacent_less_row = seats.values_at(0...col).reverse.reject { |s| s == "." }[0] == "#"
+        adjacent_greater_row = seats.values_at(col+1...seats.size).reject { |s| s == "." }[0] == "#"
+        column = chart_dupe.transpose[col]
+        adjacent_less_col = column.values_at(0...row).reverse.reject { |s| s == "." }[0] == "#"
+        adjacent_greater_col = column.values_at(row+1...column.size).reject { |s| s == "." }[0] == "#"
 
         adjacent_diagonal_one_seats = false
         adjacent_diagonal_two_seats = false
@@ -85,6 +59,9 @@ class Puzzle
         while new_row >= 0 && new_col >= 0
           if chart_dupe[new_row][new_col] == "#"
             adjacent_diagonal_one_seats = true
+            break
+          elsif chart_dupe[new_row][new_col] == "L"
+            break
           end
           new_row -= 1
           new_col -= 1
@@ -96,6 +73,9 @@ class Puzzle
         while new_row < chart_dupe.size && new_col >= 0
           if chart_dupe[new_row][new_col] == "#"
             adjacent_diagonal_two_seats = true
+            break
+          elsif chart_dupe[new_row][new_col] == "L"
+            break
           end
           new_row += 1
           new_col -= 1
@@ -107,6 +87,9 @@ class Puzzle
         while new_row < chart_dupe.size && new_col < seats.size
           if chart_dupe[new_row][new_col] == "#"
             adjacent_diagonal_three_seats = true
+            break
+          elsif chart_dupe[new_row][new_col] == "L"
+            break
           end
           new_row += 1
           new_col += 1
@@ -118,6 +101,9 @@ class Puzzle
         while new_row >= 0 && new_col < seats.size
           if chart_dupe[new_row][new_col] == "#"
             adjacent_diagonal_four_seats = true
+            break
+          elsif chart_dupe[new_row][new_col] == "L"
+            break
           end
           new_row -= 1
           new_col += 1
@@ -131,9 +117,6 @@ class Puzzle
           adjacent_less_row,
           adjacent_greater_col,
           adjacent_less_col]
-
-        binding.pry
-
 
         if seat == "."
           "."
