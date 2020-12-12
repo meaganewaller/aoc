@@ -7,9 +7,9 @@ describe Puzzle do
     expect(Puzzle.part_one(chart)).to eql 37
   end
 
-  it "solves for part one for input" do
+  xit "solves for part one for input" do
     chart = File.readlines('./day-11/input.txt').map(&:strip).map { |r| r.split("") }
-    expect(Puzzle.part_one(chart)).to eql 37
+    expect(Puzzle.part_one(chart)).to eql ___
   end
 
   it "solves for part two for test input" do
@@ -17,8 +17,8 @@ describe Puzzle do
     expect(Puzzle.part_two(chart)).to eql 26
   end
 
-  it "solves for part two for input" do
+  xit "solves for part two for input" do
     chart = File.readlines('./day-11/input.txt').map(&:strip).map { |r| r.split("") }
-    expect(Puzzle.part_two(chart)).to eql 26
+    expect(Puzzle.part_two(chart)).to eql ___
   end
 end
